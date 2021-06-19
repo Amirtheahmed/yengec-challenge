@@ -18,7 +18,9 @@ Clone project from git
 then run these commands:
 
     $ php artisan migrate
-    $ php artisan serve
+    $ php artisan key:generate 
+    $ php artisan passport:install 
+    $ php artisan serve 
 
 ## Testing
 To run tests :
