@@ -1,14 +1,11 @@
 <?php
 
-
 namespace App\Http\Requests;
-
 
 use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequestValidator extends FormRequest
 {
-
     /**
      * Talep için geçerli olan doğrulama kurallarını alın
      *
@@ -19,7 +16,7 @@ class LoginRequestValidator extends FormRequest
         return [
             'name' => 'alpha_num|max:50',
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ];
     }
 
@@ -30,9 +27,7 @@ class LoginRequestValidator extends FormRequest
      */
     protected function prepareForValidation()
     {
-        $this->merge([
-                         'email' => strip_tags($this->email),
-                     ]);
+        $this->merge(['email' => strip_tags($this->email)]);
     }
 
     /**

@@ -1,24 +1,11 @@
 <?php
 
-
 namespace App\Http\Requests;
-
 
 use Illuminate\Foundation\Http\FormRequest;
 
 class IntegrationUpdateRequestValidator extends FormRequest
 {
-    /**
-     * Kullanıcının bu isteği yapmaya yetkili olup olmadığını belirleyin
-     *
-     * @return bool
-     */
-    public function authorize(): bool
-    {
-        //Burada JWT yetkilendirmesini uyguluyoruz.
-        return true;
-    }
-
     /**
      * Talep için geçerli olan doğrulama kurallarını alın
      *

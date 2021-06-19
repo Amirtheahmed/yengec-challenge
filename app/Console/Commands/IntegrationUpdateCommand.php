@@ -22,39 +22,26 @@ class IntegrationUpdateCommand extends Command
     protected $description = 'Bir entegrasyon güncelle';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
-     * Bir entegrasyonu kaydetmek için kullanılan konsol komutu
+     * Bir entegrasyonu güncellemek için kullanılan konsol komutu
      *
      * @return int
      */
     public function handle(): int
     {
         if(!Integration::all()->isEmpty()) {
-            $ints = array_column(Integration::all(['marketplace'])->toArray(), 'marketplace');
+            $integrations = array_column(Integration::all(['marketplace'])->toArray(), 'marketplace');
 
             $choices = Array();
-            foreach($ints as $intg){
-                array_push($choices, strval($intg));
+            foreach($integrations as $marketplace) {
+                array_push($choices, strval($marketplace));
             }
 
             $choice = $this->choice(
                 'Lütfen güncellemek istediğiniz entegrasyonu seçin: ',
-                $choices,
-                null,
-                $maxAttempts = null,
-                $allowMultipleSelections = false
+                $choices
             );
 
-            //find integration
+            //Entegrasyonu bul
             $integration = Integration::where('marketplace', $choice)->first();
 
             $input['marketplace'] = $this->ask('Marketplace adı?');
@@ -67,9 +54,8 @@ class IntegrationUpdateCommand extends Command
             $this->info('Entegrasyon başarıyla güncellendi!');
             return 0;
         }
-        else {
-            $this->error("Kayıtlı entegrasyonlar yok!");
-            return 1;
-        }
+
+        $this->error("Kayıtlı entegrasyonlar yok!");
+        return 1;
     }
 }

@@ -7,7 +7,6 @@ use Illuminate\Foundation\Http\FormRequest;
 class RegisterRequestValidator extends FormRequest
 {
 
-
     /**
      * Talep için geçerli olan doğrulama kurallarını alın
      *

@@ -23,16 +23,6 @@ class IntegrationRegisterCommand extends Command
     protected $description = 'Bir entegrasyon kaydet';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Bir entegrasyonu kaydetmek için kullanılan konsol komutu
      *
      * @return int

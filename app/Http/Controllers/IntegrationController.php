@@ -41,7 +41,7 @@ class IntegrationController extends Controller
      * @param $id
      * @return JsonResponse
      */
-    public function destroy(IntegrationService $integrationService,$id): JsonResponse
+    public function destroy(IntegrationService $integrationService, $id): JsonResponse
     {
         return $integrationService->remove($id);
     }

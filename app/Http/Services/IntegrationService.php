@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Services;
 
 use App\Models\Integration;
@@ -9,6 +8,8 @@ use Illuminate\Http\JsonResponse;
 class IntegrationService
 {
     /**
+     * Entegrasyon ekleme servis
+     *
      * @param $data
      * @return JsonResponse
      */
@@ -24,12 +25,13 @@ class IntegrationService
       if(auth()->user()->integrations()->save($integration)){
           return response()->json(['status' => true, 'integration' => $integration->toArray()], 201);
       }
-      else {
-          return response()->json(['status' => false, 'message' => 'Integration ekleme tamamlanamadı'], 400);
-      }
+
+      return response()->json(['status' => false, 'message' => 'Integration ekleme tamamlanamadı'], 400);
     }
 
     /**
+     * Entegrasyon güncelleme servis
+     *
      * @param $data
      * @param $id
      * @return JsonResponse
@@ -44,13 +46,16 @@ class IntegrationService
 
         $updatedIntegration = $integration->fill($data)->save();
 
-        if($updatedIntegration)
+        if($updatedIntegration) {
             return response()->json(['status' => true], 204);
-        else
-            return response()->json(['status' => false, 'message' => 'Integration güncellenemedi'], 500);
+        }
+
+        return response()->json(['status' => false, 'message' => 'Integration güncellenemedi'], 500);
     }
 
     /**
+     * Entegrasyon silme servis
+     *
      * @param $id
      * @return JsonResponse
      */
@@ -58,13 +63,14 @@ class IntegrationService
     {
         $integration = auth()->user()->integrations()->find($id);
 
-        if(!$integration)
+        if(!$integration) {
             return response()->json(['status' => false, 'message' => 'Integration bulunamadı'], 400);
+        }
 
-        if($integration->delete())
+        if($integration->delete()) {
             return response()->json(['status' => true], 204);
-        else
-            return response()->json(['status' => false, 'message' => 'Integration silinemedi'], 500);
+        }
 
+        return response()->json(['status' => false, 'message' => 'Integration silinemedi'], 500);
     }
 }
